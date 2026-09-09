@@ -7,6 +7,7 @@ import {
   Shield,
   User as UserIcon,
   Calendar,
+  X,
 } from 'lucide-react';
 import { useWorkspace } from '../context/WorkspaceContext';
 import { UserAvatar } from '../components/common/UserAvatar';
@@ -84,28 +85,33 @@ export const AuditLogPage: React.FC = () => {
         </button>
       </div>
 
-      {/* Filter and Search Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-xl shadow-2xs">
-        <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-          <Search className="w-4 h-4 text-slate-400" />
+      {/* Filter and Search Bar - fully responsive */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-[#0a0b16]/70 backdrop-blur-md border border-white/10 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-2 flex-1 min-w-0 w-full sm:w-auto">
+          <Search className="w-4 h-4 text-indigo-400 shrink-0" />
           <input
             type="text"
             placeholder="Search audit trail by actor, target, or action detail..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs bg-transparent border-none outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400"
+            className="w-full text-xs bg-transparent border-none outline-none text-white placeholder:text-indigo-300/40 min-w-0"
           />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery('')} className="text-indigo-400 hover:text-white p-1 shrink-0">
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
-        <div className="flex items-center gap-2 text-xs flex-wrap">
+        <div className="flex items-center gap-2 text-xs flex-wrap self-end sm:self-auto">
           {/* Action filter */}
           <select
             value={selectedAction}
             onChange={(e) => setSelectedAction(e.target.value)}
-            className="text-xs rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1.5 text-slate-700 dark:text-slate-300"
+            className="text-xs rounded-xl border border-white/10 bg-white/5 p-1.5 text-indigo-200 focus:outline-none focus:border-indigo-500"
           >
             {actionTypes.map((act) => (
-              <option key={act} value={act}>
+              <option key={act} value={act} className="bg-[#0a0b16] text-white">
                 Action: {act}
               </option>
             ))}
@@ -115,11 +121,11 @@ export const AuditLogPage: React.FC = () => {
           <select
             value={selectedActor}
             onChange={(e) => setSelectedActor(e.target.value)}
-            className="text-xs rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1.5 text-slate-700 dark:text-slate-300"
+            className="text-xs rounded-xl border border-white/10 bg-white/5 p-1.5 text-indigo-200 focus:outline-none focus:border-indigo-500"
           >
-            <option value="All">All Actors</option>
+            <option value="All" className="bg-[#0a0b16] text-white">All Actors</option>
             {members.map((m) => (
-              <option key={m.id} value={m.name}>
+              <option key={m.id} value={m.name} className="bg-[#0a0b16] text-white">
                 {m.name}
               </option>
             ))}

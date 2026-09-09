@@ -83,7 +83,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenFocusModal }) => {
       className="sticky top-0 z-30 flex items-center justify-between h-14 px-4 sm:px-6 bg-black/50 backdrop-blur-md border-b border-white/10 text-[#e0e0ff] transition-colors select-none"
     >
       {/* Left section: mobile hamburger & workspace switcher */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
         <button
           id="btn-mobile-menu-toggle"
           type="button"
@@ -151,26 +151,30 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenFocusModal }) => {
         </div>
       </div>
 
-      {/* Center section: Global Search Bar */}
-      <div className="flex-1 max-w-md mx-3 hidden sm:block">
+      {/* Center section: Global Search Bar - fully responsive across mobile, tablet, and desktop */}
+      <div className="flex-1 min-w-0 max-w-md mx-2 sm:mx-3">
         <button
           id="btn-trigger-global-search"
           type="button"
           onClick={() => setIsSearchOpen(true)}
-          className="w-full flex items-center justify-between px-4 py-1.5 text-xs text-indigo-200/70 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-colors shadow-2xs"
+          className="w-full flex items-center justify-between px-2.5 sm:px-3.5 md:px-4 py-1.5 text-xs text-indigo-200/70 bg-white/5 hover:bg-white/10 hover:border-indigo-500/40 rounded-full border border-white/10 transition-all shadow-2xs group min-w-0"
         >
-          <div className="flex items-center gap-2">
-            <Search className="w-3.5 h-3.5 text-indigo-400" />
-            <span>Search telemetry, tasks, logs, records...</span>
+          <div className="flex items-center gap-2 min-w-0 flex-1 mr-1">
+            <Search className="w-3.5 h-3.5 text-indigo-400 shrink-0 group-hover:text-indigo-300 transition-colors" />
+            <span className="truncate text-left text-xs">
+              <span className="inline sm:hidden">Search...</span>
+              <span className="hidden sm:inline lg:hidden">Search workspace...</span>
+              <span className="hidden lg:inline">Search telemetry, tasks, logs, records...</span>
+            </span>
           </div>
-          <kbd className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-white/10 border border-white/10 text-indigo-300 shadow-2xs">
+          <kbd className="hidden md:inline-flex items-center font-mono text-[10px] px-1.5 py-0.5 rounded bg-white/10 border border-white/10 text-indigo-300 shrink-0">
             ⌘K
           </kbd>
         </button>
       </div>
 
       {/* Right section: Focus indicator, Create button, Notifications, Help, User Avatar */}
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         {/* Focus Mode button/badge */}
         <button
           id="btn-focus-mode-indicator"
@@ -362,12 +366,12 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenFocusModal }) => {
           )}
         </div>
 
-        {/* Help icon */}
+        {/* Help icon - hidden on small mobile to maximize search bar space */}
         <button
           id="btn-help-dialog"
           type="button"
           onClick={() => setIsHelpOpen(true)}
-          className="p-2 rounded-full text-indigo-300 hover:text-white hover:bg-white/10 transition-colors"
+          className="hidden sm:flex p-2 rounded-full text-indigo-300 hover:text-white hover:bg-white/10 transition-colors"
           aria-label="Workspace guide and shortcuts"
         >
           <HelpCircle className="w-4 h-4" />

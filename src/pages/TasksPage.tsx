@@ -227,19 +227,19 @@ export const TasksPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Filter & Search Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-xl shadow-2xs">
-        <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-          <Search className="w-4 h-4 text-slate-400 shrink-0" />
+      {/* Filter & Search Bar - fully responsive across mobile and desktop */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-[#0a0b16]/70 backdrop-blur-md border border-white/10 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-2 flex-1 min-w-0 w-full sm:w-auto">
+          <Search className="w-4 h-4 text-indigo-400 shrink-0" />
           <input
             type="text"
             placeholder="Search tasks by title, description, or assignee..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs bg-transparent border-none outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400"
+            className="w-full text-xs bg-transparent border-none outline-none text-white placeholder:text-indigo-300/40 min-w-0"
           />
           {searchQuery && (
-            <button onClick={() => setSearchQuery('')} className="text-slate-400 hover:text-slate-600">
+            <button onClick={() => setSearchQuery('')} className="text-indigo-400 hover:text-white p-1 shrink-0">
               <X className="w-3.5 h-3.5" />
             </button>
           )}
@@ -248,17 +248,17 @@ export const TasksPage: React.FC = () => {
         <div className="flex items-center gap-2 text-xs flex-wrap">
           {/* Priority filter */}
           <div className="flex items-center gap-1">
-            <Filter className="w-3.5 h-3.5 text-slate-400" />
+            <Filter className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
             <select
               value={selectedPriority}
               onChange={(e) => setSelectedPriority(e.target.value)}
-              className="text-xs rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1.5 text-slate-700 dark:text-slate-300"
+              className="text-xs rounded-xl border border-white/10 bg-white/5 p-1.5 text-indigo-200 focus:outline-none focus:border-indigo-500"
             >
-              <option value="all">All Priorities</option>
-              <option value="Urgent">Urgent</option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
+              <option value="all" className="bg-[#0a0b16] text-white">All Priorities</option>
+              <option value="Urgent" className="bg-[#0a0b16] text-white">Urgent</option>
+              <option value="High" className="bg-[#0a0b16] text-white">High</option>
+              <option value="Medium" className="bg-[#0a0b16] text-white">Medium</option>
+              <option value="Low" className="bg-[#0a0b16] text-white">Low</option>
             </select>
           </div>
 
@@ -266,11 +266,11 @@ export const TasksPage: React.FC = () => {
           <select
             value={selectedLabel}
             onChange={(e) => setSelectedLabel(e.target.value)}
-            className="text-xs rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1.5 text-slate-700 dark:text-slate-300"
+            className="text-xs rounded-xl border border-white/10 bg-white/5 p-1.5 text-indigo-200 focus:outline-none focus:border-indigo-500"
           >
-            <option value="all">All Labels</option>
+            <option value="all" className="bg-[#0a0b16] text-white">All Labels</option>
             {allLabels.map((lbl) => (
-              <option key={lbl} value={lbl}>
+              <option key={lbl} value={lbl} className="bg-[#0a0b16] text-white">
                 {lbl}
               </option>
             ))}
@@ -278,15 +278,15 @@ export const TasksPage: React.FC = () => {
 
           {/* Sort order */}
           <div className="flex items-center gap-1">
-            <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+            <ArrowUpDown className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="text-xs rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1.5 text-slate-700 dark:text-slate-300"
+              className="text-xs rounded-xl border border-white/10 bg-white/5 p-1.5 text-indigo-200 focus:outline-none focus:border-indigo-500"
             >
-              <option value="dueDate">Due Date</option>
-              <option value="priority">Priority</option>
-              <option value="title">Alphabetical</option>
+              <option value="dueDate" className="bg-[#0a0b16] text-white">Due Date</option>
+              <option value="priority" className="bg-[#0a0b16] text-white">Priority</option>
+              <option value="title" className="bg-[#0a0b16] text-white">Alphabetical</option>
             </select>
           </div>
         </div>

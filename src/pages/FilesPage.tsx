@@ -16,6 +16,7 @@ import {
   Trash2,
   HardDrive,
   Check,
+  X,
 } from 'lucide-react';
 import { useWorkspace } from '../context/WorkspaceContext';
 import { FileItem } from '../types';
@@ -156,33 +157,40 @@ export const FilesPage: React.FC = () => {
         })}
       </div>
 
-      {/* Filter and View toggler */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-xl shadow-2xs">
-        <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-          <Search className="w-4 h-4 text-slate-400" />
+      {/* Filter and View toggler - fully responsive */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-[#0a0b16]/70 backdrop-blur-md border border-white/10 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-2 flex-1 min-w-0 w-full sm:w-auto">
+          <Search className="w-4 h-4 text-indigo-400 shrink-0" />
           <input
             type="text"
             placeholder="Search documents by filename or author..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs bg-transparent border-none outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400"
+            className="w-full text-xs bg-transparent border-none outline-none text-white placeholder:text-indigo-300/40 min-w-0"
           />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery('')} className="text-indigo-400 hover:text-white p-1 shrink-0">
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
-        <div className="flex items-center gap-1 p-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg">
+        <div className="flex items-center justify-end gap-1 p-0.5 bg-white/5 border border-white/10 rounded-xl shrink-0 self-end sm:self-auto">
           <button
             onClick={() => setViewMode('grid')}
-            className={`p-1.5 rounded-md ${
-              viewMode === 'grid' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs' : 'text-slate-500'
+            className={`p-1.5 rounded-lg transition-colors ${
+              viewMode === 'grid' ? 'bg-indigo-600 text-white shadow-xs' : 'text-indigo-300/60 hover:text-white'
             }`}
+            aria-label="Grid view"
           >
             <Grid className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => setViewMode('table')}
-            className={`p-1.5 rounded-md ${
-              viewMode === 'table' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs' : 'text-slate-500'
+            className={`p-1.5 rounded-lg transition-colors ${
+              viewMode === 'table' ? 'bg-indigo-600 text-white shadow-xs' : 'text-indigo-300/60 hover:text-white'
             }`}
+            aria-label="Table view"
           >
             <List className="w-3.5 h-3.5" />
           </button>
